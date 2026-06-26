@@ -1,36 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { getClases } from "@/lib/clases";
 
-type Clase = {
-  numero: string;
-  title: string;
-  text: string;
-  href: string;
-};
+export default async function ClasesPersonalizadas() {
+  const clases = await getClases();
 
-const CLASES: Clase[] = [
-  {
-    numero: "01",
-    title: "Clases individuales",
-    text: "Atención uno a uno con un coach profesional. Plan a medida según tu nivel, ritmo y objetivos.",
-    href: "#actividades",
-  },
-  {
-    numero: "02",
-    title: "Clases grupales",
-    text: "Entrená en grupos reducidos, mejorá tu técnica y disfrutá la energía de jugar acompañado.",
-    href: "#actividades",
-  },
-  {
-    numero: "03",
-    title: "Clases sociales",
-    text: "Partidos y dinámicas distendidas para conocer gente, sumar horas de cancha y pasarla bien.",
-    href: "#actividades",
-  },
-];
-
-export default function ClasesPersonalizadas() {
   return (
     <section id="actividades" className="bg-white">
       <div className="grid grid-cols-1 lg:grid-cols-12">
@@ -60,7 +35,7 @@ export default function ClasesPersonalizadas() {
             </p>
 
             <ul className="mt-10 space-y-8">
-              {CLASES.map((clase) => (
+              {clases.map((clase) => (
                 <li key={clase.numero} className="flex gap-5">
                   <span className="font-kanit text-4xl font-bold leading-none text-lime md:text-5xl">
                     {clase.numero}

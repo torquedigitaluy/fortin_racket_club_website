@@ -1,58 +1,21 @@
 import Image from "next/image";
 import { LandPlot, Users, Trophy, Shirt, Dumbbell, Flame } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { getBeneficios, type Beneficio } from "@/lib/beneficios";
 
-type Beneficio = {
-  icon: LucideIcon;
-  title: string;
-  text: string;
+// Registro de íconos permitidos (el CMS guarda el nombre como string).
+const ICONS: Record<string, LucideIcon> = {
+  LandPlot,
+  Users,
+  Trophy,
+  Shirt,
+  Dumbbell,
+  Flame,
 };
 
-const IZQUIERDA: Beneficio[] = [
-  {
-    icon: LandPlot,
-    title: "2 Canchas",
-    text: "Dos canchas profesionales de polvo de ladrillo en óptimas condiciones.",
-  },
-  {
-    icon: Users,
-    title: "Coaches profesionales",
-    text: "Equipo de entrenadores certificados para todos los niveles.",
-  },
-  {
-    icon: Trophy,
-    title: "Torneos",
-    text: "Competencias internas y torneos abiertos durante todo el año.",
-  },
-];
-
-const DERECHA: Beneficio[] = [
-  {
-    icon: Shirt,
-    title: "Guardarropa",
-    text: "Vestuarios y guardarropa con lockers para tus pertenencias.",
-  },
-  {
-    icon: Dumbbell,
-    title: "Campos de entrenamiento",
-    text: "Espacios dedicados para la práctica física y la preparación.",
-  },
-  {
-    icon: Flame,
-    title: "Barbacoa",
-    text: "Sector de parrillas para compartir después del partido.",
-  },
-];
-
-function BeneficioItem({
-  beneficio,
-  align,
-}: {
-  beneficio: Beneficio;
-  align: "left" | "right";
-}) {
-  const Icon = beneficio.icon;
-  const reverse = align === "right";
+function BeneficioItem({ beneficio }: { beneficio: Beneficio }) {
+  const Icon = ICONS[beneficio.icono] ?? LandPlot;
+  const reverse = beneficio.columna === "right";
   return (
     <div
       className={`flex items-start gap-4 ${
@@ -74,7 +37,10 @@ function BeneficioItem({
   );
 }
 
-export default function Beneficios() {
+export default async function Beneficios() {
+  const beneficios = await getBeneficios();
+  const izquierda = beneficios.filter((b) => b.columna === "left");
+  const derecha = beneficios.filter((b) => b.columna === "right");
   return (
     <section id="beneficios" className="bg-white py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-6">
@@ -96,8 +62,8 @@ export default function Beneficios() {
         <div className="grid items-center gap-10 lg:grid-cols-3 lg:gap-12">
           {/* Columna izquierda */}
           <div className="flex flex-col gap-10">
-            {IZQUIERDA.map((b) => (
-              <BeneficioItem key={b.title} beneficio={b} align="left" />
+            {izquierda.map((b) => (
+              <BeneficioItem key={b.title} beneficio={b} />
             ))}
           </div>
 
@@ -114,8 +80,8 @@ export default function Beneficios() {
 
           {/* Columna derecha */}
           <div className="flex flex-col gap-10">
-            {DERECHA.map((b) => (
-              <BeneficioItem key={b.title} beneficio={b} align="right" />
+            {derecha.map((b) => (
+              <BeneficioItem key={b.title} beneficio={b} />
             ))}
           </div>
         </div>
