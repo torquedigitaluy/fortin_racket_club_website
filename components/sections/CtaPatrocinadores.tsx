@@ -17,6 +17,7 @@ export default async function CtaPatrocinadores() {
           alt="Cancha de polvo de ladrillo"
           fill
           sizes="100vw"
+          unoptimized
           className="object-cover"
         />
         {/* Tinte arcilla para garantizar el aspecto de polvo de ladrillo */}

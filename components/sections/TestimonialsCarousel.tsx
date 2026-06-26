@@ -56,6 +56,7 @@ export default function TestimonialsCarousel({
               alt={`Foto de ${t.autor}`}
               fill
               sizes="64px"
+              unoptimized
               className="object-cover"
             />
           </div>

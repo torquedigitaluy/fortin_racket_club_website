@@ -87,6 +87,7 @@ export default function ReservaCanchasClient({
               alt="Ambiente del club de tenis"
               fill
               sizes="(max-width: 1024px) 100vw, 66vw"
+              unoptimized
               className="object-cover"
             />
           </div>

@@ -2,26 +2,29 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { getClases } from "@/lib/clases";
+import { getSettings } from "@/lib/settings";
 
 export default async function ClasesPersonalizadas() {
-  const clases = await getClases();
+  const [clases, settings] = await Promise.all([getClases(), getSettings()]);
 
   return (
     <section id="actividades" className="bg-white">
-      <div className="grid grid-cols-1 lg:grid-cols-12">
-        {/* Izquierda: imagen de tenista recortada */}
-        <div className="relative h-80 lg:col-span-5 lg:h-auto lg:min-h-[640px]">
+      <div className="grid grid-cols-1 lg:grid-cols-2">
+        {/* Izquierda: imagen de tenista recortada (editable desde el CMS) */}
+        <div className="relative h-80 lg:h-auto lg:min-h-[640px]">
           <Image
-            src="https://images.unsplash.com/photo-1531315396756-905d68d21b56?auto=format&fit=crop&w=1000&q=80"
-            alt="Tenista en plena acción durante una clase"
+            src={settings.clases_imagen_url}
+            alt={settings.clases_imagen_alt}
             fill
-            sizes="(max-width: 1024px) 100vw, 42vw"
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            quality={90}
+            unoptimized
             className="object-cover"
           />
         </div>
 
         {/* Derecha: contenido + lista numerada */}
-        <div className="flex flex-col justify-center px-6 py-16 lg:col-span-7 lg:px-16 lg:py-24">
+        <div className="flex flex-col justify-center px-6 py-16 lg:px-16 lg:py-24">
           <div className="max-w-xl">
             <span className="font-mulish text-sm font-semibold uppercase tracking-widest text-lime">
               Empieza hoy

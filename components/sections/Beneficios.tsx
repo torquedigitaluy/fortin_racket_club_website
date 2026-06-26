@@ -2,6 +2,7 @@ import Image from "next/image";
 import { LandPlot, Users, Trophy, Shirt, Dumbbell, Flame } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { getBeneficios, type Beneficio } from "@/lib/beneficios";
+import { getSettings } from "@/lib/settings";
 
 // Registro de íconos permitidos (el CMS guarda el nombre como string).
 const ICONS: Record<string, LucideIcon> = {
@@ -38,7 +39,10 @@ function BeneficioItem({ beneficio }: { beneficio: Beneficio }) {
 }
 
 export default async function Beneficios() {
-  const beneficios = await getBeneficios();
+  const [beneficios, settings] = await Promise.all([
+    getBeneficios(),
+    getSettings(),
+  ]);
   const izquierda = beneficios.filter((b) => b.columna === "left");
   const derecha = beneficios.filter((b) => b.columna === "right");
   return (
@@ -70,10 +74,11 @@ export default async function Beneficios() {
           {/* Imagen central */}
           <div className="relative mx-auto h-72 w-full max-w-sm overflow-hidden rounded-[2rem] shadow-xl sm:h-80 lg:h-[460px]">
             <Image
-              src="https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?auto=format&fit=crop&w=800&q=80"
-              alt="Raqueta de tenis y pelotas"
+              src={settings.beneficios_imagen_url}
+              alt={settings.beneficios_imagen_alt}
               fill
               sizes="(max-width: 1024px) 100vw, 33vw"
+              unoptimized
               className="object-cover"
             />
           </div>

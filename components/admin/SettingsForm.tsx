@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useFormStatus } from "react-dom";
 import { SETTINGS_GROUPS, type Settings } from "@/lib/settings";
 import { saveSettings } from "@/app/admin/(panel)/ajustes/actions";
+import ImageUpload from "./ImageUpload";
 
 function SubmitButton() {
   const { pending } = useFormStatus();
@@ -36,28 +37,37 @@ export default function SettingsForm({ settings }: { settings: Settings }) {
           <legend className="font-kanit text-lg font-bold text-brand">
             {group.label}
           </legend>
-          {group.fields.map((f) => (
-            <label key={f.key} className="flex flex-col gap-1">
-              <span className="font-mulish text-sm text-brand">{f.label}</span>
-              {f.multiline ? (
-                <textarea
-                  name={f.key}
-                  defaultValue={settings[f.key] ?? ""}
-                  rows={3}
-                  className={inputCls}
-                  onChange={() => setGuardado(false)}
-                />
-              ) : (
-                <input
-                  type="text"
-                  name={f.key}
-                  defaultValue={settings[f.key] ?? ""}
-                  className={inputCls}
-                  onChange={() => setGuardado(false)}
-                />
-              )}
-            </label>
-          ))}
+          {group.fields.map((f) =>
+            f.image ? (
+              <ImageUpload
+                key={f.key}
+                name={f.key}
+                label={f.label}
+                defaultValue={settings[f.key] ?? ""}
+              />
+            ) : (
+              <label key={f.key} className="flex flex-col gap-1">
+                <span className="font-mulish text-sm text-brand">{f.label}</span>
+                {f.multiline ? (
+                  <textarea
+                    name={f.key}
+                    defaultValue={settings[f.key] ?? ""}
+                    rows={3}
+                    className={inputCls}
+                    onChange={() => setGuardado(false)}
+                  />
+                ) : (
+                  <input
+                    type="text"
+                    name={f.key}
+                    defaultValue={settings[f.key] ?? ""}
+                    className={inputCls}
+                    onChange={() => setGuardado(false)}
+                  />
+                )}
+              </label>
+            )
+          )}
         </fieldset>
       ))}
 

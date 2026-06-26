@@ -47,6 +47,7 @@ export default function HeroCarousel({
           fill
           priority={i === 0}
           sizes="100vw"
+          unoptimized
           className={`object-cover transition-opacity duration-1000 ${
             i === current ? "opacity-100" : "opacity-0"
           }`}
@@ -54,8 +55,8 @@ export default function HeroCarousel({
       ))}
 
       {/* Overlay oscuro */}
-      <div className="absolute inset-0 bg-brand/60" />
-      <div className="absolute inset-0 bg-gradient-to-t from-brand/80 via-transparent to-brand/30" />
+      <div className="absolute inset-0 bg-brand/30" />
+      <div className="absolute inset-0 bg-gradient-to-t from-brand/50 via-transparent to-brand/10" />
 
       {/* Contenido */}
       <div className="relative z-10 mx-auto flex h-full max-w-4xl flex-col items-center justify-center px-6 text-center text-white">

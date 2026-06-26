@@ -34,6 +34,7 @@ export default function Newsletter({
         alt=""
         fill
         sizes="100vw"
+        unoptimized
         className="object-cover"
       />
       {/* Overlay #142d4b al 75% */}

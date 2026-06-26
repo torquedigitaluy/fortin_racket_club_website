@@ -42,6 +42,7 @@ export default function PlanesSocioClient({
         alt=""
         fill
         sizes="100vw"
+        unoptimized
         className="object-cover"
       />
       <div className="absolute inset-0 bg-clay/80" />
@@ -83,6 +84,7 @@ export default function PlanesSocioClient({
                       alt=""
                       fill
                       sizes="(max-width: 1024px) 100vw, 25vw"
+                      unoptimized
                       className="object-cover"
                     />
                     <div className="absolute inset-0 bg-brand/75" />

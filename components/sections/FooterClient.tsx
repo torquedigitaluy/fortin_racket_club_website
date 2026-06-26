@@ -100,6 +100,7 @@ export default function FooterClient({
                     alt=""
                     fill
                     sizes="120px"
+                    unoptimized
                     className="object-cover transition-transform duration-300 group-hover:scale-110"
                   />
                   <span className="absolute inset-0 bg-brand/0 transition-colors group-hover:bg-brand/30" />
