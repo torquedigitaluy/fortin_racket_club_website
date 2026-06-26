@@ -9,9 +9,13 @@ import type { PlanPublico } from "@/lib/planes";
 export default function PlanesSocioClient({
   features,
   planes,
+  bgUrl,
+  destacadoBgUrl,
 }: {
   features: string[];
   planes: PlanPublico[];
+  bgUrl: string;
+  destacadoBgUrl: string;
 }) {
   const [loading, setLoading] = useState<string | null>(null);
   const [aviso, setAviso] = useState<string | null>(null);
@@ -38,7 +42,7 @@ export default function PlanesSocioClient({
     <section id="socios" className="relative overflow-hidden py-20 md:py-28">
       {/* Fondo de cancha de polvo de ladrillo (igual que el CTA banner) */}
       <Image
-        src="https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&w=1920&q=80"
+        src={bgUrl}
         alt=""
         fill
         sizes="100vw"
@@ -80,7 +84,7 @@ export default function PlanesSocioClient({
                 {destacado && (
                   <>
                     <Image
-                      src="https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?auto=format&fit=crop&w=800&q=80"
+                      src={destacadoBgUrl}
                       alt=""
                       fill
                       sizes="(max-width: 1024px) 100vw, 25vw"

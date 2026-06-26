@@ -20,9 +20,11 @@ function SubmitButton() {
 export default function Newsletter({
   titulo = "Sumate a nuestro newsletter",
   texto = "Recibí novedades, torneos y promociones exclusivas para la comunidad del club.",
+  bgUrl = "https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?auto=format&fit=crop&w=1920&q=80",
 }: {
   titulo?: string;
   texto?: string;
+  bgUrl?: string;
 }) {
   const [state, formAction] = useFormState(subscribeNewsletter, null);
 
@@ -30,7 +32,7 @@ export default function Newsletter({
     <section className="relative overflow-hidden">
       {/* Fondo: raquetas cruzadas */}
       <Image
-        src="https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?auto=format&fit=crop&w=1920&q=80"
+        src={bgUrl}
         alt=""
         fill
         sizes="100vw"

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Check } from "lucide-react";
 import { getProximosPartidos } from "@/lib/partidos";
+import { getSettings } from "@/lib/settings";
 
 const BENEFICIOS = [
   "Cuadro individual y de dobles",
@@ -31,7 +32,10 @@ function formatFecha(iso: string) {
 }
 
 export default async function TorneoCalendario() {
-  const partidos = await getProximosPartidos();
+  const [partidos, settings] = await Promise.all([
+    getProximosPartidos(),
+    getSettings(),
+  ]);
 
   return (
     <section id="torneo" className="w-full">
@@ -112,8 +116,8 @@ export default async function TorneoCalendario() {
         {/* Columna derecha: imagen estática */}
         <div className="relative min-h-[320px] lg:min-h-0">
           <Image
-            src="https://images.unsplash.com/photo-1599058917212-d750089bc07e?auto=format&fit=crop&w=1000&q=80"
-            alt="Jugador de tenis ejecutando un golpe en acción"
+            src={settings.torneo_imagen_url}
+            alt={settings.torneo_imagen_alt}
             fill
             sizes="(max-width: 1024px) 100vw, 33vw"
             unoptimized

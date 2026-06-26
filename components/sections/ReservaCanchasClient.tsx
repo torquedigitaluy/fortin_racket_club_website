@@ -15,10 +15,14 @@ export default function ReservaCanchasClient({
   precioHora,
   fechaInicial,
   ocupacionInicial,
+  imagenUrl,
+  imagenAlt,
 }: {
   precioHora: number;
   fechaInicial: string;
   ocupacionInicial: Ocupacion[];
+  imagenUrl: string;
+  imagenAlt: string;
 }) {
   const [cancha, setCancha] = useState<Cancha>("Cancha 1");
   const [fecha, setFecha] = useState(fechaInicial);
@@ -83,8 +87,8 @@ export default function ReservaCanchasClient({
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
           <div className="relative h-72 overflow-hidden rounded-2xl lg:col-span-2 lg:h-auto">
             <Image
-              src="https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&w=1200&q=80"
-              alt="Ambiente del club de tenis"
+              src={imagenUrl}
+              alt={imagenAlt}
               fill
               sizes="(max-width: 1024px) 100vw, 66vw"
               unoptimized
