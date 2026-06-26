@@ -19,6 +19,8 @@ export default async function ReservaCanchas() {
       precioHora={precioHora}
       fechaInicial={hoy}
       ocupacionInicial={ocupacion}
+      imagenUrl={settings.reservas_imagen_url}
+      imagenAlt={settings.reservas_imagen_alt}
     />
   );
 }

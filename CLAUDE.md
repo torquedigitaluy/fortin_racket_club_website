@@ -6,18 +6,20 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Estado actual
 
-Scaffolding Next.js 14 (App Router, TypeScript) **ya creado y compilando**. Estructura: `app/` (layout con fuentes + `page.tsx` que compone secciones), `components/sections/` (un componente por sección — ver su `README.md`), `lib/supabase.ts`. Falta implementar las 13 secciones.
+Landing de 13 secciones **implementada y compilando**, con **Supabase Auth + un CMS interno (`/admin`)** para gestionar todo el contenido, y **reservas de canchas reales**. Estructura: `app/` (landing en `page.tsx` + panel en `app/admin/`), `components/sections/` (una por sección — ver su `README.md`), `components/admin/` (UI del CMS), `lib/` (getters de datos + clientes Supabase + lógica del CMS), `supabase/migrations/` (esquema).
 
-`PLAN.md` es la fuente de verdad de las 13 secciones de la landing (orden, layout, colores y comportamiento de cada una). Léelo antes de implementar cualquier sección y construye en ese orden. `components/sections/README.md` mapea cada sección a su componente y si es Server o Client.
+Todo el contenido se lee desde Supabase mediante getters en `lib/*` que **siempre caen a datos mock** si faltan credenciales o la tabla está vacía (patrón de resiliencia: la web nunca se rompe). Mercado Pago está **mockeado** (devuelve "no configurado" sin token) pero la reserva sí se registra.
+
+`PLAN.md` describe el diseño original de las 13 secciones (orden, layout, colores). `components/sections/README.md` mapea cada sección a su componente, su fuente de datos y si es Server/Client. `SETUP_SUPABASE.md` tiene los pasos de configuración manual (env, migraciones, usuario admin).
 
 ## Stack tecnológico (requisitos — no sustituir sin pedir)
 
 - **Framework**: Next.js 14+ con **App Router**. Server Components por defecto; Client Components (`"use client"`) solo donde haya interactividad (sliders del Hero/Testimonials, carruseles, formularios, scroll suave, estado de reservas).
 - **Estilos**: Tailwind CSS, **mobile-first** y completamente responsivo.
-- **Backend / DB**: Supabase para datos dinámicos. Tablas conocidas por la spec: `coaches` (sección Entrenadores) y la agenda de partidos de "Torneo & Calendario" (campos: Fecha, Jugadores, Cancha). Lee datos de Supabase desde Server Components cuando sea posible.
-- **Pagos**: **Mercado Pago** para reservar cancha y para hacerse socio (planes). No usar otra pasarela.
+- **Backend / DB**: Supabase. Auth con `@supabase/ssr`. Lee datos desde Server Components cuando sea posible. Esquema en `supabase/migrations/` (ver sección "Base de datos").
+- **Pagos**: **Mercado Pago** para reservar cancha y para hacerse socio (planes). No usar otra pasarela. Hoy mockeado (sin token → "no disponible").
 - **Iconos**: `lucide-react` (preferido) o `react-icons`.
-- **Imágenes**: placeholders de Unsplash durante el desarrollo (se reemplazarán por imágenes reales después).
+- **Imágenes**: subidas al bucket `media` de Supabase Storage desde el CMS. Se sirven con `unoptimized` en `next/image` (sin recompresión → calidad original; subir ya optimizadas). Placeholders de Unsplash como defaults.
 
 ## Sistema de diseño (Tailwind config)
 
@@ -41,11 +43,27 @@ npm run start    # servir build de producción
 npm run lint     # ESLint (next/core-web-vitals)
 ```
 
-Variables de entorno en `.env.local` (plantilla en `.env.local.example`): `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `MERCADOPAGO_ACCESS_TOKEN`, `NEXT_PUBLIC_MERCADOPAGO_PUBLIC_KEY`.
+Variables de entorno en `.env.local` (plantilla en `.env.local.example`): `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY` (solo servidor, **nunca** `NEXT_PUBLIC_`), `MERCADOPAGO_ACCESS_TOKEN`, `NEXT_PUBLIC_MERCADOPAGO_PUBLIC_KEY`.
+
+## Base de datos (Supabase)
+
+- **Migraciones** en `supabase/migrations/` (numeradas `0001…`). El repo de GitHub está conectado a Supabase: las migraciones se aplican al hacer push. Para aplicarlas a mano se puede usar la Management API con un Personal Access Token. **Nunca edites una migración ya aplicada**: agregá una nueva.
+- **Tablas de contenido**: `coaches`, `partidos`, `servicios`, `clases`, `beneficios`, `sponsors`, `hero_slides`, `estadisticas`, `testimonios`, `footer_fotos`, `nav_links`, `planes` + `plan_features` + `plan_feature_values` (matriz), `site_settings` (key/value), `reservas`, `suscriptores`.
+- **RLS**: lectura pública (`select using(true)`) y escritura solo admin vía la función `is_admin()` (`SECURITY DEFINER`, evita recursión). `reservas` no tiene SELECT público: la disponibilidad se expone con el RPC `get_ocupacion(fecha)` (sin PII). El bucket de Storage `media` es público para lectura, escritura solo admin.
+- **Auth**: tabla `profiles(id, email, role)`. Un trigger crea el profile al registrarse; se promueve a admin con `update profiles set role='admin'`. El registro público está deshabilitado.
+
+## CMS / Panel admin (`app/admin/`)
+
+- Protegido por `middleware.ts` (verifica rol admin) + `requireAdmin()` en el layout y en cada server action. Login en `/admin/login`. El grupo de rutas `(panel)` agrupa lo protegido (login queda fuera para no hacer loop).
+- **CRUD genérico**: las colecciones simples se describen en `lib/admin/resources.ts` (registry de campos) y se gestionan con las rutas `app/admin/(panel)/[resource]` + `components/admin/ResourceForm.tsx` + las server actions de `lib/admin/crud.ts`. Para agregar una colección al CMS, sumá su entrada al registry.
+- **Editores a medida**: `ajustes` (key/value de `site_settings`), `planes` (matriz planes×ventajas), `reservas` (grilla por fecha con bloqueo).
+- **Subida de imágenes**: `components/admin/ImageUpload.tsx` + `lib/storage.ts` (bucket `media`).
 
 ## Convenciones de arquitectura
 
 - Genera código estructurado en **componentes limpios y separados por sección** (un componente por sección de `PLAN.md`).
-- Mantén la lógica de cliente (estado de sliders/carruseles, formularios) aislada en Client Components pequeños; deja el resto como Server Components.
-- Centraliza el cliente de Supabase y las llamadas a Mercado Pago; no dupliques inicialización en componentes.
-- Las credenciales (Supabase, Mercado Pago) van en variables de entorno (`.env.local`), nunca en el código.
+- **Patrón de getters resilientes** (`lib/coaches.ts`, `lib/servicios.ts`, etc.): `type` + array `MOCK` + getter async que consulta Supabase y **cae al mock** ante cualquier error/vacío, con `console.warn`. Replicá este patrón al agregar contenido nuevo.
+- **Wrapper Server + hijo Client**: las secciones con interactividad (Hero, Testimonials, Navbar, Footer, Planes, Reservas) son un Server Component que hace el `await getX()` y pasa los datos por props a un hijo Client (`XClient.tsx`) que mantiene el estado. No conviertas un Server Component en Client solo para traer datos.
+- **Textos/imágenes singulares** (no listas): van en `site_settings` vía `lib/settings.ts` (con default en `SETTINGS_DEFAULTS` y entrada en `SETTINGS_GROUPS` para que aparezcan en `/admin/ajustes`). `getSettings()` mergea DB sobre defaults e ignora valores vacíos.
+- **Clientes Supabase** (no dupliques inicialización): `lib/supabase.ts` (anon singleton, lecturas públicas), `lib/supabase/server.ts` (Server Components/actions con sesión), `lib/supabase/browser.ts` (login/uploads), `lib/supabase/admin.ts` (service-role, **solo servidor**, tareas privilegiadas como insertar reservas).
+- Las credenciales van en variables de entorno (`.env.local`), nunca en el código. La service-role key jamás se expone al cliente.

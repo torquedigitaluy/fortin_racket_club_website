@@ -13,7 +13,7 @@ export default async function CtaPatrocinadores() {
       {/* CTA Banner — fondo de cancha de polvo de ladrillo */}
       <div className="relative overflow-hidden">
         <Image
-          src="https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&w=1920&q=80"
+          src={settings.cta_bg_url}
           alt="Cancha de polvo de ladrillo"
           fill
           sizes="100vw"

@@ -36,6 +36,20 @@ export const SETTINGS_DEFAULTS: Settings = {
   beneficios_imagen_url:
     "https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?auto=format&fit=crop&w=800&q=80",
   beneficios_imagen_alt: "Raqueta de tenis y pelotas",
+  torneo_imagen_url:
+    "https://images.unsplash.com/photo-1599058917212-d750089bc07e?auto=format&fit=crop&w=1000&q=80",
+  torneo_imagen_alt: "Jugador de tenis ejecutando un golpe en acción",
+  reservas_imagen_url:
+    "https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&w=1200&q=80",
+  reservas_imagen_alt: "Ambiente del club de tenis",
+  cta_bg_url:
+    "https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&w=1920&q=80",
+  planes_bg_url:
+    "https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&w=1920&q=80",
+  planes_destacado_bg_url:
+    "https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?auto=format&fit=crop&w=800&q=80",
+  newsletter_bg_url:
+    "https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?auto=format&fit=crop&w=1920&q=80",
 };
 
 // Agrupación y etiquetas para el formulario del CMS.
@@ -83,12 +97,25 @@ export const SETTINGS_GROUPS: {
     fields: [{ key: "reservas_precio_hora", label: "Precio por hora ($)" }],
   },
   {
-    label: "Secciones",
+    label: "Imágenes de secciones",
     fields: [
       { key: "clases_imagen_url", label: "Clases personalizadas — imagen", image: true },
       { key: "clases_imagen_alt", label: "Clases personalizadas — texto alternativo" },
       { key: "beneficios_imagen_url", label: "Beneficios — imagen central", image: true },
       { key: "beneficios_imagen_alt", label: "Beneficios — texto alternativo" },
+      { key: "torneo_imagen_url", label: "Torneo & Calendario — imagen", image: true },
+      { key: "torneo_imagen_alt", label: "Torneo & Calendario — texto alternativo" },
+      { key: "reservas_imagen_url", label: "Reserva de canchas — imagen", image: true },
+      { key: "reservas_imagen_alt", label: "Reserva de canchas — texto alternativo" },
+    ],
+  },
+  {
+    label: "Imágenes de fondo",
+    fields: [
+      { key: "cta_bg_url", label: "Banner CTA — fondo", image: true },
+      { key: "planes_bg_url", label: "Planes — fondo", image: true },
+      { key: "planes_destacado_bg_url", label: "Planes — fondo tarjeta destacada", image: true },
+      { key: "newsletter_bg_url", label: "Newsletter — fondo", image: true },
     ],
   },
 ];
@@ -110,7 +137,9 @@ export async function getSettings(): Promise<Settings> {
 
   const fromDb: Settings = {};
   for (const row of data as { key: string; value: string | null }[]) {
-    if (row.value != null) fromDb[row.key] = row.value;
+    // Solo sobrescribimos el default si hay un valor no vacío: así una imagen
+    // borrada/vacía en la DB cae al default en lugar de romperse.
+    if (row.value) fromDb[row.key] = row.value;
   }
 
   return { ...SETTINGS_DEFAULTS, ...fromDb };

@@ -34,6 +34,7 @@ export default async function Home() {
         <Newsletter
           titulo={settings.newsletter_titulo}
           texto={settings.newsletter_texto}
+          bgUrl={settings.newsletter_bg_url}
         />
       </main>
       <Footer />
