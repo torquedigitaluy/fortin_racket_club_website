@@ -52,8 +52,8 @@ export const SETTINGS_DEFAULTS: Settings = {
     "https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?auto=format&fit=crop&w=800&q=80",
   beneficios_imagen_alt: "Raqueta de tenis y pelotas",
   torneo_imagen_url:
-    "https://images.unsplash.com/photo-1714840961998-8d6c02ace00b?auto=format&fit=crop&w=1000&q=80",
-  torneo_imagen_alt: "Jugador de tenis sacando en la cancha",
+    "https://images.unsplash.com/photo-1751275061929-2f63fc96838c?auto=format&fit=crop&w=1000&q=80",
+  torneo_imagen_alt: "Cancha de polvo de ladrillo",
   torneo_bg_url:
     "https://images.unsplash.com/photo-1751275061929-2f63fc96838c?auto=format&fit=crop&w=1000&q=80",
   torneo_bg_alt: "Cancha de polvo de ladrillo",

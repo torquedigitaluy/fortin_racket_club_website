@@ -1,8 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Check } from "lucide-react";
 import { getProximosPartidos } from "@/lib/partidos";
 import { getSettings } from "@/lib/settings";
+import ParallaxImage from "./ParallaxImage";
 
 const BENEFICIOS = [
   "Cuadro individual y de dobles",
@@ -42,16 +42,9 @@ export default async function TorneoCalendario() {
       <div className="grid grid-cols-1 lg:grid-cols-3">
         {/* Columna izquierda: Fortín Club Cup — fondo de polvo de ladrillo con filtro azul */}
         <div className="relative flex flex-col justify-center overflow-hidden px-8 py-14 lg:px-12 lg:py-20">
-          <Image
-            src={settings.torneo_bg_url}
-            alt={settings.torneo_bg_alt}
-            fill
-            sizes="(max-width: 1024px) 100vw, 33vw"
-            unoptimized
-            className="object-cover"
-          />
+          <ParallaxImage src={settings.torneo_bg_url} alt={settings.torneo_bg_alt} />
           {/* Filtro azul (similar al banner "Oferta de bienvenida") */}
-          <div className="absolute inset-0 bg-brand/80" />
+          <div className="absolute inset-0 bg-brand/50" />
 
           <div className="relative text-white">
             <h2 className="font-kanit text-5xl font-bold md:text-6xl">
@@ -126,16 +119,11 @@ export default async function TorneoCalendario() {
           </Link>
         </div>
 
-        {/* Columna derecha: imagen estática */}
+        {/* Columna derecha: imagen estática con filtro azul */}
         <div className="relative min-h-[320px] lg:min-h-0">
-          <Image
-            src={settings.torneo_imagen_url}
-            alt={settings.torneo_imagen_alt}
-            fill
-            sizes="(max-width: 1024px) 100vw, 33vw"
-            unoptimized
-            className="object-cover"
-          />
+          <ParallaxImage src={settings.torneo_imagen_url} alt={settings.torneo_imagen_alt} />
+          {/* Filtro azul */}
+          <div className="absolute inset-0 bg-brand/50" />
         </div>
       </div>
     </section>
