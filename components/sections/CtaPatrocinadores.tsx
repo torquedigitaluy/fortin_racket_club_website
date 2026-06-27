@@ -1,7 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 import { getSponsors } from "@/lib/sponsors";
 import { getSettings } from "@/lib/settings";
+import ParallaxImage from "./ParallaxImage";
 
 export default async function CtaPatrocinadores() {
   const [patrocinadores, settings] = await Promise.all([
@@ -12,14 +12,7 @@ export default async function CtaPatrocinadores() {
     <section aria-label="Promoción y patrocinadores">
       {/* CTA Banner — fondo de cancha de polvo de ladrillo */}
       <div className="relative overflow-hidden">
-        <Image
-          src={settings.cta_bg_url}
-          alt="Cancha de polvo de ladrillo"
-          fill
-          sizes="100vw"
-          unoptimized
-          className="object-cover"
-        />
+        <ParallaxImage src={settings.cta_bg_url} alt="Cancha de polvo de ladrillo" />
         {/* Tinte arcilla para garantizar el aspecto de polvo de ladrillo */}
         <div className="absolute inset-0 bg-clay/80" />
         <div className="absolute inset-0 bg-gradient-to-r from-brand/50 to-transparent" />

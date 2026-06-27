@@ -28,7 +28,7 @@ export default async function Servicios() {
           {servicios.map((servicio) => (
             <article
               key={servicio.title}
-              className="group flex flex-col overflow-hidden rounded-t-[2rem] bg-white shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+              className="group flex flex-col overflow-hidden rounded-[15px] bg-white shadow-md transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
             >
               {/* Imagen */}
               <div className="relative h-56 w-full overflow-hidden">

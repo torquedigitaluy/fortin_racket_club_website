@@ -52,8 +52,11 @@ export const SETTINGS_DEFAULTS: Settings = {
     "https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?auto=format&fit=crop&w=800&q=80",
   beneficios_imagen_alt: "Raqueta de tenis y pelotas",
   torneo_imagen_url:
-    "https://images.unsplash.com/photo-1599058917212-d750089bc07e?auto=format&fit=crop&w=1000&q=80",
-  torneo_imagen_alt: "Jugador de tenis ejecutando un golpe en acción",
+    "https://images.unsplash.com/photo-1714840961998-8d6c02ace00b?auto=format&fit=crop&w=1000&q=80",
+  torneo_imagen_alt: "Jugador de tenis sacando en la cancha",
+  torneo_bg_url:
+    "https://images.unsplash.com/photo-1751275061929-2f63fc96838c?auto=format&fit=crop&w=1000&q=80",
+  torneo_bg_alt: "Cancha de polvo de ladrillo",
   reservas_imagen_url:
     "https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&w=1200&q=80",
   reservas_imagen_alt: "Ambiente del club de tenis",
@@ -146,7 +149,9 @@ export const SETTINGS_GROUPS: {
       { key: "clases_imagen_alt", label: "Clases personalizadas — texto alternativo" },
       { key: "beneficios_imagen_url", label: "Beneficios — imagen central", image: true },
       { key: "beneficios_imagen_alt", label: "Beneficios — texto alternativo" },
-      { key: "torneo_imagen_url", label: "Torneo & Calendario — imagen", image: true },
+      { key: "torneo_bg_url", label: "Fortín Club Cup — fondo (polvo de ladrillo)", image: true },
+      { key: "torneo_bg_alt", label: "Fortín Club Cup — texto alternativo del fondo" },
+      { key: "torneo_imagen_url", label: "Torneo & Calendario — imagen (derecha)", image: true },
       { key: "torneo_imagen_alt", label: "Torneo & Calendario — texto alternativo" },
       { key: "reservas_imagen_url", label: "Reserva de canchas — imagen", image: true },
       { key: "reservas_imagen_alt", label: "Reserva de canchas — texto alternativo" },

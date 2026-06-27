@@ -33,8 +33,8 @@ const MOCK_SERVICIOS: Servicio[] = [
     title: "Escuela infantil",
     text: "Formación para los más chicos en un entorno seguro, divertido y profesional.",
     image:
-      "https://images.unsplash.com/photo-1526232761682-d26e03ac148e?auto=format&fit=crop&w=800&q=80",
-    alt: "Niños aprendiendo a jugar al tenis",
+      "https://images.unsplash.com/photo-1723980856085-8f8e725329a7?auto=format&fit=crop&w=800&q=80",
+    alt: "Niña con raqueta en una cancha de tenis",
     href: "#actividades",
   },
   {

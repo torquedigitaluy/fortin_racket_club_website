@@ -69,7 +69,7 @@ export default function HeroCarousel({
           <img
             src={logoUrl}
             alt={logoAlt}
-            className="mb-6 h-64 w-auto max-w-full object-contain drop-shadow-md sm:h-80 md:h-96"
+            className="mb-2 h-80 w-auto max-w-full object-contain drop-shadow-md md:h-96"
           />
         )}
         <h1 className="font-kanit text-4xl font-bold uppercase leading-tight tracking-wide drop-shadow-md sm:text-5xl md:text-7xl">
@@ -80,7 +80,7 @@ export default function HeroCarousel({
         </p>
         <Link
           href="#quienes-somos"
-          className="mt-8 rounded-full bg-brand px-8 py-3.5 font-mulish text-sm font-semibold text-white shadow-lg transition-transform hover:scale-105"
+          className="mt-8 rounded-full bg-lime px-8 py-3.5 font-mulish text-sm font-semibold text-brand shadow-lg transition-transform hover:scale-105"
         >
           {ctaLabel}
         </Link>

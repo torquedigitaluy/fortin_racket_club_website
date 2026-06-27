@@ -40,34 +40,47 @@ export default async function TorneoCalendario() {
   return (
     <section id="torneo" className="w-full">
       <div className="grid grid-cols-1 lg:grid-cols-3">
-        {/* Columna izquierda: Fortín Club Cup (#93d419) */}
-        <div className="flex flex-col justify-center bg-lime px-8 py-14 lg:px-12 lg:py-20">
-          <h2 className="font-kanit text-3xl font-bold text-brand md:text-4xl">
-            Fortín Club Cup
-          </h2>
-          <p className="mt-4 font-mulish text-sm text-brand/80">
-            Nuestro torneo insignia. Competí, sumá ranking y viví el mejor tenis
-            del club.
-          </p>
-          <ul className="mt-8 space-y-3">
-            {BENEFICIOS.map((beneficio) => (
-              <li
-                key={beneficio}
-                className="flex items-start gap-3 font-mulish text-sm text-brand"
-              >
-                <span className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-brand text-white">
-                  <Check className="h-3.5 w-3.5" />
-                </span>
-                {beneficio}
-              </li>
-            ))}
-          </ul>
-          <Link
-            href="#contacto"
-            className="mt-10 inline-block w-fit rounded-full bg-brand px-8 py-3 font-mulish text-sm font-semibold text-white transition-transform hover:scale-105"
-          >
-            Saber más
-          </Link>
+        {/* Columna izquierda: Fortín Club Cup — fondo de polvo de ladrillo con filtro azul */}
+        <div className="relative flex flex-col justify-center overflow-hidden px-8 py-14 lg:px-12 lg:py-20">
+          <Image
+            src={settings.torneo_bg_url}
+            alt={settings.torneo_bg_alt}
+            fill
+            sizes="(max-width: 1024px) 100vw, 33vw"
+            unoptimized
+            className="object-cover"
+          />
+          {/* Filtro azul (similar al banner "Oferta de bienvenida") */}
+          <div className="absolute inset-0 bg-brand/80" />
+
+          <div className="relative text-white">
+            <h2 className="font-kanit text-5xl font-bold md:text-6xl">
+              Fortín Club Cup
+            </h2>
+            <p className="mt-4 font-mulish text-sm text-white/80">
+              Nuestro torneo insignia. Competí, sumá ranking y viví el mejor tenis
+              del club.
+            </p>
+            <ul className="mt-8 space-y-3">
+              {BENEFICIOS.map((beneficio) => (
+                <li
+                  key={beneficio}
+                  className="flex items-start gap-3 font-mulish text-sm text-white"
+                >
+                  <span className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-lime text-brand">
+                    <Check className="h-3.5 w-3.5" />
+                  </span>
+                  {beneficio}
+                </li>
+              ))}
+            </ul>
+            <Link
+              href="#contacto"
+              className="mt-10 inline-block w-fit rounded-full bg-lime px-8 py-3 font-mulish text-sm font-semibold text-brand transition-transform hover:scale-105"
+            >
+              Saber más
+            </Link>
+          </div>
         </div>
 
         {/* Columna central: agenda de partidos (#142d4b) — datos dinámicos */}

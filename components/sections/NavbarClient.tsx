@@ -33,15 +33,31 @@ export default function NavbarClient({ navLinks }: { navLinks: NavLink[] }) {
           onClick={() => setMenuOpen(false)}
           className="flex items-center gap-2 font-kanit text-xl font-bold tracking-tight md:text-2xl"
         >
-          <span
-            className="inline-block h-2.5 w-2.5 rounded-full bg-lime transition-colors"
+          {/* Pelota de tenis: verde sobre fondo blanco, blanca sobre fondo transparente */}
+          <svg
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
             aria-hidden
-          />
+            className="h-6 w-6 shrink-0 md:h-7 md:w-7"
+          >
+            <circle cx="12" cy="12" r="10" fill={onLight ? "#93d419" : "#ffffff"} />
+            <path
+              d="M4.2 5.6a11 11 0 0 1 0 12.8"
+              fill="none"
+              stroke={onLight ? "#ffffff" : "#142d4b"}
+              strokeWidth="1.4"
+              strokeLinecap="round"
+            />
+            <path
+              d="M19.8 5.6a11 11 0 0 0 0 12.8"
+              fill="none"
+              stroke={onLight ? "#ffffff" : "#142d4b"}
+              strokeWidth="1.4"
+              strokeLinecap="round"
+            />
+          </svg>
           <span className={onLight ? "text-brand" : "text-white"}>
-            Fortín{" "}
-            <span className={onLight ? "text-brand" : "text-lime"}>
-              Racket Club
-            </span>
+            Fortín Racket Club
           </span>
         </Link>
 
@@ -61,14 +77,8 @@ export default function NavbarClient({ navLinks }: { navLinks: NavLink[] }) {
           ))}
         </ul>
 
-        {/* CTA + botón móvil */}
+        {/* Botón móvil (menú) */}
         <div className="flex items-center gap-3">
-          <Link
-            href="#reservas"
-            className="hidden rounded-full bg-brand px-5 py-2.5 font-mulish text-sm font-semibold text-white transition-transform hover:scale-105 lg:inline-block"
-          >
-            Reservar
-          </Link>
           <button
             type="button"
             onClick={() => setMenuOpen((v) => !v)}
@@ -96,15 +106,6 @@ export default function NavbarClient({ navLinks }: { navLinks: NavLink[] }) {
                 </Link>
               </li>
             ))}
-            <li>
-              <Link
-                href="#reservas"
-                onClick={() => setMenuOpen(false)}
-                className="mt-2 block rounded-full bg-brand px-5 py-3 text-center font-semibold text-white"
-              >
-                Reservar
-              </Link>
-            </li>
           </ul>
         </div>
       )}

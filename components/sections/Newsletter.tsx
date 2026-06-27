@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { useFormState, useFormStatus } from "react-dom";
 import { subscribeNewsletter } from "@/lib/public-actions";
+import ParallaxImage from "./ParallaxImage";
 
 function SubmitButton() {
   const { pending } = useFormStatus();
@@ -30,15 +30,8 @@ export default function Newsletter({
 
   return (
     <section className="relative overflow-hidden">
-      {/* Fondo: raquetas cruzadas */}
-      <Image
-        src={bgUrl}
-        alt=""
-        fill
-        sizes="100vw"
-        unoptimized
-        className="object-cover"
-      />
+      {/* Fondo: raquetas cruzadas (parallax — doble intensidad) */}
+      <ParallaxImage src={bgUrl} alt="" intensity={0.8} />
       {/* Overlay #142d4b al 75% */}
       <div className="absolute inset-0 bg-brand/75" />
 
