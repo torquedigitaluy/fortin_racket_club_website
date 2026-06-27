@@ -71,7 +71,7 @@ export default function ReservaCanchasClient({
       <div className="mx-auto max-w-7xl px-6">
         {/* Encabezado */}
         <div className="mb-12 max-w-2xl">
-          <span className="font-mulish text-sm font-semibold uppercase tracking-widest text-lime">
+          <span className="font-mulish text-sm font-semibold uppercase tracking-widest text-brand">
             Jugá hoy
           </span>
           <h2 className="mt-3 font-kanit text-3xl font-bold text-brand md:text-4xl">

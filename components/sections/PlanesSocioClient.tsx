@@ -55,7 +55,7 @@ export default function PlanesSocioClient({
       <div className="relative mx-auto max-w-7xl px-6">
         {/* Encabezado */}
         <div className="mx-auto mb-14 max-w-2xl text-center">
-          <span className="font-mulish text-sm font-semibold uppercase tracking-widest text-lime">
+          <span className="font-mulish text-sm font-semibold uppercase tracking-widest text-white">
             Hacete socio
           </span>
           <h2 className="mt-3 font-kanit text-3xl font-bold text-white md:text-4xl">

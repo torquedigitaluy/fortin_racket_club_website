@@ -50,7 +50,7 @@ export default async function Beneficios() {
       <div className="mx-auto max-w-7xl px-6">
         {/* Encabezado */}
         <div className="mx-auto mb-16 max-w-2xl text-center">
-          <span className="font-mulish text-sm font-semibold uppercase tracking-widest text-lime">
+          <span className="font-mulish text-sm font-semibold uppercase tracking-widest text-brand">
             Beneficios
           </span>
           <h2 className="mt-3 font-kanit text-3xl font-bold text-brand md:text-4xl">
@@ -72,14 +72,14 @@ export default async function Beneficios() {
           </div>
 
           {/* Imagen central */}
-          <div className="relative mx-auto h-72 w-full max-w-sm overflow-hidden rounded-[2rem] shadow-xl sm:h-80 lg:h-[460px]">
+          <div className="relative mx-auto h-72 w-full max-w-sm overflow-hidden rounded-[2rem] bg-offwhite shadow-xl sm:h-80 lg:h-[460px]">
             <Image
               src={settings.beneficios_imagen_url}
               alt={settings.beneficios_imagen_alt}
               fill
               sizes="(max-width: 1024px) 100vw, 33vw"
               unoptimized
-              className="object-cover"
+              className="object-contain lg:object-cover"
             />
           </div>
 

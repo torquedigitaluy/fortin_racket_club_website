@@ -29,7 +29,6 @@ export const ADMIN_NAV: AdminNavGroup[] = [
       { label: "Estadísticas", href: "/admin/estadisticas" },
       { label: "Sponsors", href: "/admin/sponsors" },
       { label: "Links de navegación", href: "/admin/nav_links" },
-      { label: "Fotos del footer", href: "/admin/footer_fotos" },
     ],
   },
   {

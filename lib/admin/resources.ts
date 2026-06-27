@@ -201,18 +201,6 @@ export const RESOURCES: Record<string, Resource> = {
     ],
   },
 
-  footer_fotos: {
-    table: "footer_fotos",
-    label: "Fotos del footer",
-    singular: "foto",
-    orderBy: { column: "orden", ascending: true },
-    fields: [
-      { name: "image_url", label: "Imagen", type: "image", required: true, primary: true },
-      ORDEN,
-      ACTIVO,
-    ],
-  },
-
   partidos: {
     table: "partidos",
     label: "Partidos",

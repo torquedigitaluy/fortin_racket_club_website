@@ -1,5 +1,13 @@
 import Image from "next/image";
+import { Instagram, Facebook, Twitter } from "lucide-react";
 import { getCoaches } from "@/lib/coaches";
+
+// Redes mostradas en cada tarjeta de coach (placeholders hasta tener URLs reales).
+const REDES = [
+  { Icon: Instagram, label: "Instagram" },
+  { Icon: Facebook, label: "Facebook" },
+  { Icon: Twitter, label: "X" },
+];
 
 export default async function Entrenadores() {
   const coaches = await getCoaches();
@@ -9,7 +17,7 @@ export default async function Entrenadores() {
       <div className="mx-auto max-w-7xl px-6">
         {/* Encabezado */}
         <div className="mx-auto mb-14 max-w-2xl text-center">
-          <span className="font-mulish text-sm font-semibold uppercase tracking-widest text-lime">
+          <span className="font-mulish text-sm font-semibold uppercase tracking-widest text-brand">
             Nuestro equipo
           </span>
           <h2 className="mt-3 font-kanit text-3xl font-bold text-brand md:text-4xl">
@@ -44,12 +52,25 @@ export default async function Entrenadores() {
                 <h3 className="font-kanit text-lg font-bold text-brand">
                   {coach.nombre}
                 </h3>
-                <span className="mt-1 font-mulish text-xs font-semibold uppercase tracking-wide text-lime">
+                <span className="mt-1 font-mulish text-xs font-semibold uppercase tracking-wide text-brand">
                   {coach.cargo}
                 </span>
                 <p className="mt-3 font-mulish text-sm text-brand/70">
                   {coach.descripcion}
                 </p>
+                {/* Redes sociales */}
+                <div className="mt-auto flex gap-2 pt-4">
+                  {REDES.map(({ Icon, label }) => (
+                    <a
+                      key={label}
+                      href="#"
+                      aria-label={`${coach.nombre} en ${label}`}
+                      className="flex h-9 w-9 items-center justify-center rounded-full bg-brand/5 text-brand transition-colors hover:bg-brand hover:text-white"
+                    >
+                      <Icon className="h-4 w-4" strokeWidth={1.75} />
+                    </a>
+                  ))}
+                </div>
               </div>
             </article>
           ))}
