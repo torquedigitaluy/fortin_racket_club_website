@@ -23,12 +23,12 @@ export default async function Home() {
         <Hero />
         <Servicios />
         <ClasesPersonalizadas />
+        <PlanesSocio />
+        <ReservaCanchas />
         <TorneoCalendario />
         <Beneficios />
         <CtaPatrocinadores />
         <Entrenadores />
-        <PlanesSocio />
-        <ReservaCanchas />
         <Estadisticas />
         <Testimonials />
         <Newsletter

@@ -20,6 +20,7 @@ Todo el contenido se lee desde Supabase mediante getters en `lib/*` que **siempr
 - **Pagos**: **Mercado Pago** para reservar cancha y para hacerse socio (planes). No usar otra pasarela. Hoy mockeado (sin token → "no disponible").
 - **Iconos**: `lucide-react` (preferido) o `react-icons`.
 - **Imágenes**: subidas al bucket `media` de Supabase Storage desde el CMS. Se sirven con `unoptimized` en `next/image` (sin recompresión → calidad original; subir ya optimizadas). Placeholders de Unsplash como defaults.
+- **Video**: el fondo del Hero puede ser un video (ver "Hero" en Convenciones). Los videos también van al bucket `media` (subida con `components/admin/VideoUpload.tsx`). Usar **`.mp4` (H.264)**, no `.mov`/QuickTime (falla en Firefox y otros). El `<video>` va siempre muteado y en loop.
 
 ## Sistema de diseño (Tailwind config)
 
@@ -27,8 +28,8 @@ Definir estos tokens en la config de Tailwind y usarlos en lugar de valores hard
 
 - **Azul marca** `#142d4b` — color principal (acentos del logo, botones ovalados, fondos de bloques destacados, overlays al 75% de opacidad).
 - **Off-white** `#f7f7f7` — fondos de secciones claras.
-- **Verde lima** `#93d419` — acentos/CTAs secundarios (columna "Fortín Club Cup", botones "Ver más").
-- **Marrón arcilla de tenis** — secciones específicas (banner CTA con fondo de polvo de ladrillo).
+- **Verde lima** `#93d419` (token `lime`) — acentos/CTAs secundarios y botones ("Ver más", "Reservar"/"Saber más" sobre fondo oscuro). Nota: varios subtítulos/eyebrows que antes eran lima se pasaron a **azul marca** o **blanco**; usá lima con mesura.
+- **Marrón arcilla de tenis** `#b5563a` (token `clay`) — banner "Oferta de bienvenida" y fondo de la columna "Fortín Club Cup" (foto de polvo de ladrillo con filtro azul `bg-brand`).
 - **Sub-footer** `#0d1d30`.
 - **Tipografía**: Kanit para títulos, Mulish para bloques de texto (configurar vía `next/font`). Si no se encuentran, utilizar similares.
 
@@ -48,7 +49,8 @@ Variables de entorno en `.env.local` (plantilla en `.env.local.example`): `NEXT_
 ## Base de datos (Supabase)
 
 - **Migraciones** en `supabase/migrations/` (numeradas `0001…`). El repo de GitHub está conectado a Supabase: las migraciones se aplican al hacer push. Para aplicarlas a mano se puede usar la Management API con un Personal Access Token. **Nunca edites una migración ya aplicada**: agregá una nueva.
-- **Tablas de contenido**: `coaches`, `partidos`, `servicios`, `clases`, `beneficios`, `sponsors`, `hero_slides`, `estadisticas`, `testimonios`, `footer_fotos`, `nav_links`, `planes` + `plan_features` + `plan_feature_values` (matriz), `site_settings` (key/value), `reservas`, `suscriptores`.
+- **Tablas de contenido**: `coaches`, `partidos`, `servicios`, `clases`, `beneficios`, `sponsors`, `hero_slides`, `estadisticas`, `testimonios`, `nav_links`, `planes` + `plan_features` + `plan_feature_values` (matriz), `site_settings` (key/value), `reservas`, `suscriptores`.
+- **`footer_fotos` quedó en desuso**: el footer ahora muestra un **mapa de Google Maps embebido** (iframe en `FooterClient.tsx`) y la **dirección** (`contacto_direccion`) en vez de la galería de fotos. La tabla y su migración siguen existiendo, pero ya no se consulta ni está en el CMS (se removió `lib/footerFotos.ts` y su entrada del registry).
 - **RLS**: lectura pública (`select using(true)`) y escritura solo admin vía la función `is_admin()` (`SECURITY DEFINER`, evita recursión). `reservas` no tiene SELECT público: la disponibilidad se expone con el RPC `get_ocupacion(fecha)` (sin PII). El bucket de Storage `media` es público para lectura, escritura solo admin.
 - **Auth**: tabla `profiles(id, email, role)`. Un trigger crea el profile al registrarse; se promueve a admin con `update profiles set role='admin'`. El registro público está deshabilitado.
 
@@ -57,7 +59,8 @@ Variables de entorno en `.env.local` (plantilla en `.env.local.example`): `NEXT_
 - Protegido por `middleware.ts` (verifica rol admin) + `requireAdmin()` en el layout y en cada server action. Login en `/admin/login`. El grupo de rutas `(panel)` agrupa lo protegido (login queda fuera para no hacer loop).
 - **CRUD genérico**: las colecciones simples se describen en `lib/admin/resources.ts` (registry de campos) y se gestionan con las rutas `app/admin/(panel)/[resource]` + `components/admin/ResourceForm.tsx` + las server actions de `lib/admin/crud.ts`. Para agregar una colección al CMS, sumá su entrada al registry.
 - **Editores a medida**: `ajustes` (key/value de `site_settings`), `planes` (matriz planes×ventajas), `reservas` (grilla por fecha con bloqueo).
-- **Subida de imágenes**: `components/admin/ImageUpload.tsx` + `lib/storage.ts` (bucket `media`).
+- **Subida de media**: `components/admin/ImageUpload.tsx` (imágenes) y `components/admin/VideoUpload.tsx` (videos) + `lib/storage.ts` (bucket `media`).
+- **Tipos de campo en `SETTINGS_GROUPS`** (`lib/settings.ts`): texto plano, `multiline` (textarea), `image` (`ImageUpload`), `video` (`VideoUpload`) y `select` (dropdown con `options`). El `SettingsForm` los renderiza según esas flags.
 
 ## Convenciones de arquitectura
 
@@ -67,3 +70,7 @@ Variables de entorno en `.env.local` (plantilla en `.env.local.example`): `NEXT_
 - **Textos/imágenes singulares** (no listas): van en `site_settings` vía `lib/settings.ts` (con default en `SETTINGS_DEFAULTS` y entrada en `SETTINGS_GROUPS` para que aparezcan en `/admin/ajustes`). `getSettings()` mergea DB sobre defaults e ignora valores vacíos.
 - **Clientes Supabase** (no dupliques inicialización): `lib/supabase.ts` (anon singleton, lecturas públicas), `lib/supabase/server.ts` (Server Components/actions con sesión), `lib/supabase/browser.ts` (login/uploads), `lib/supabase/admin.ts` (service-role, **solo servidor**, tareas privilegiadas como insertar reservas).
 - Las credenciales van en variables de entorno (`.env.local`), nunca en el código. La service-role key jamás se expone al cliente.
+- **Hero (galería o video)**: `hero_modo` (`galeria`|`video`) en `site_settings`. `components/sections/Hero.tsx` ramifica: video → `HeroVideo` (overlay en server) + `HeroVideoBg` (client; elige fuente escritorio vs móvil/vertical 9:16 con `matchMedia`, render sin `src` en SSR para bajar solo el video correcto); galería → `HeroCarousel`. Logo opcional arriba del título (`hero_logo_url`). Los campos de video viven en el grupo "Hero — modo y video" de `/admin/ajustes`.
+- **Parallax de fondos**: `components/sections/ParallaxImage.tsx` (client) reemplaza al `<Image fill>` de fondo y lo desplaza con el scroll (prop `intensity`, respeta `prefers-reduced-motion`). En uso en "Oferta de bienvenida", "Newsletter" y "Fortín Club Cup".
+- **Orden de secciones**: la fuente de verdad es `app/page.tsx` (puede diferir del orden de `PLAN.md`).
+- **Contenido en producción es estático**: la home se prerenderiza en build leyendo Supabase, así que los cambios hechos desde el CMS **no se reflejan hasta un nuevo deploy** (no hay ISR/revalidate configurado). Para cambios de contenido puntuales se puede actualizar `site_settings` con la service-role y redeployar.

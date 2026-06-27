@@ -1,17 +1,15 @@
-import Image from "next/image";
 import Link from "next/link";
-import { Phone, Instagram, Facebook, Youtube, MessageCircle } from "lucide-react";
+import { Phone, MapPin, Instagram, Facebook, Youtube, MessageCircle } from "lucide-react";
 import type { NavLink } from "@/lib/navLinks";
 import type { Settings } from "@/lib/settings";
 import ScrollTopButton from "./ScrollTopButton";
+import FooterMap from "./FooterMap";
 
 export default function FooterClient({
   enlaces,
-  fotos,
   settings,
 }: {
   enlaces: NavLink[];
-  fotos: string[];
   settings: Settings;
 }) {
   const redes = [
@@ -30,15 +28,19 @@ export default function FooterClient({
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 py-16 md:grid-cols-3">
           {/* Columna 1: info corporativa + teléfono + redes */}
           <div>
-            <h3 className="font-kanit text-2xl font-bold">
-              Fortín <span className="text-lime">Racket Club</span>
+            <h3 className="font-kanit text-2xl font-bold uppercase">
+              Fortín <span className="text-white">Racket Club</span>
             </h3>
             <p className="mt-4 max-w-xs font-mulish text-sm text-white/70">
               {settings.footer_descripcion}
             </p>
+            <p className="mt-6 flex max-w-xs items-start gap-2 font-mulish text-sm text-white/70">
+              <MapPin className="mt-0.5 h-4 w-4 flex-shrink-0" />
+              {settings.contacto_direccion}
+            </p>
             <a
               href={telHref}
-              className="mt-6 inline-flex items-center gap-2 font-mulish text-sm text-white/90 transition-colors hover:text-lime"
+              className="mt-4 inline-flex items-center gap-2 font-mulish text-sm text-white/90 transition-colors hover:text-lime"
             >
               <Phone className="h-4 w-4" /> {telefono}
             </a>
@@ -84,28 +86,11 @@ export default function FooterClient({
             </a>
           </div>
 
-          {/* Columna 3: fotos recientes tipo Instagram */}
+          {/* Columna 3: mapa de ubicación */}
           <div>
-            <h4 className="font-kanit text-lg font-bold">Fotos recientes</h4>
-            <div className="mt-4 grid grid-cols-3 gap-2">
-              {fotos.map((foto, i) => (
-                <a
-                  key={foto}
-                  href="#"
-                  className="group relative aspect-square overflow-hidden rounded-lg"
-                  aria-label={`Foto reciente ${i + 1}`}
-                >
-                  <Image
-                    src={foto}
-                    alt=""
-                    fill
-                    sizes="120px"
-                    unoptimized
-                    className="object-cover transition-transform duration-300 group-hover:scale-110"
-                  />
-                  <span className="absolute inset-0 bg-brand/0 transition-colors group-hover:bg-brand/30" />
-                </a>
-              ))}
+            <h4 className="font-kanit text-lg font-bold">Ubicación</h4>
+            <div className="mt-4 overflow-hidden rounded-2xl">
+              <FooterMap />
             </div>
           </div>
         </div>

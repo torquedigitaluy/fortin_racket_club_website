@@ -30,7 +30,8 @@ export const SETTINGS_DEFAULTS: Settings = {
   footer_descripcion:
     "Un club moderno donde el tenis se vive con pasión, comunidad y alto rendimiento.",
   contacto_telefono: "+54 11 1234-5678",
-  contacto_direccion: "Av. del Tenis 1234, Buenos Aires",
+  contacto_direccion:
+    "Ruta Interbalnearia Gral. Líber Seregni km 42.200, 15100 Fortín de Santa Rosa, Departamento de Canelones.",
   contacto_whatsapp_url: "https://wa.me/541112345678",
   social_instagram: "#",
   social_facebook: "#",

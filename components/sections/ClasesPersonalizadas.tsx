@@ -11,7 +11,7 @@ export default async function ClasesPersonalizadas() {
     <section id="actividades" className="bg-white">
       <div className="grid grid-cols-1 lg:grid-cols-2">
         {/* Izquierda: imagen de tenista recortada (editable desde el CMS) */}
-        <div className="relative h-80 lg:h-auto lg:min-h-[640px]">
+        <div className="relative h-96 md:h-[34rem] lg:h-auto lg:min-h-[640px]">
           <Image
             src={settings.clases_imagen_url}
             alt={settings.clases_imagen_alt}
@@ -26,7 +26,7 @@ export default async function ClasesPersonalizadas() {
         {/* Derecha: contenido + lista numerada */}
         <div className="flex flex-col justify-center px-6 py-16 lg:px-16 lg:py-24">
           <div className="max-w-xl">
-            <span className="font-mulish text-sm font-semibold uppercase tracking-widest text-lime">
+            <span className="font-mulish text-sm font-semibold uppercase tracking-widest text-brand">
               Empieza hoy
             </span>
             <h2 className="mt-3 font-kanit text-3xl font-bold text-brand md:text-4xl">

@@ -31,7 +31,7 @@ export default function NavbarClient({ navLinks }: { navLinks: NavLink[] }) {
         <Link
           href="#inicio"
           onClick={() => setMenuOpen(false)}
-          className="flex items-center gap-2 font-kanit text-xl font-bold tracking-tight md:text-2xl"
+          className="flex items-center gap-2 font-kanit text-xl font-bold uppercase tracking-tight md:text-2xl"
         >
           {/* Pelota de tenis: verde sobre fondo blanco, blanca sobre fondo transparente */}
           <svg
