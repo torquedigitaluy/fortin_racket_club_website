@@ -32,7 +32,11 @@ export default function HeroCarousel({ slides }: { slides: Slide[] }) {
   return (
     <section id="inicio" className="relative h-screen min-h-[600px] w-full overflow-hidden">
       {/* Imágenes de fondo (crossfade). Cada slide puede tener una versión
-          vertical (9:16) para móvil; si no, se reutiliza la horizontal. */}
+          vertical (9:16) para móvil; si no, se reutiliza la horizontal con
+          recorte (object-cover), igual que antes. En escritorio la foto
+          horizontal se muestra completa (object-contain) sobre un fondo
+          desenfocado de sí misma, para no recortarla sin importar su
+          relación de aspecto. */}
       {slides.map((s, i) => (
         <div
           key={s.image}
@@ -40,17 +44,25 @@ export default function HeroCarousel({ slides }: { slides: Slide[] }) {
             i === current ? "opacity-100" : "opacity-0"
           }`}
         >
-          {s.imageMovil && (
-            <Image
-              src={s.imageMovil}
-              alt={s.alt}
-              fill
-              priority={i === 0}
-              sizes="100vw"
-              unoptimized
-              className="object-cover md:hidden"
-            />
-          )}
+          {/* Fondo desenfocado, solo en escritorio (relleno detrás de la foto completa) */}
+          <div
+            aria-hidden
+            className="absolute inset-0 hidden scale-110 bg-cover bg-center blur-2xl brightness-75 md:block"
+            style={{ backgroundImage: `url(${s.image})` }}
+          />
+
+          {/* Móvil: recortada (cover), usando la imagen vertical si existe */}
+          <Image
+            src={s.imageMovil ?? s.image}
+            alt={s.alt}
+            fill
+            priority={i === 0}
+            sizes="100vw"
+            unoptimized
+            className="object-cover md:hidden"
+          />
+
+          {/* Escritorio: foto horizontal completa, sin recortar */}
           <Image
             src={s.image}
             alt={s.alt}
@@ -58,7 +70,7 @@ export default function HeroCarousel({ slides }: { slides: Slide[] }) {
             priority={i === 0}
             sizes="100vw"
             unoptimized
-            className={`object-cover ${s.imageMovil ? "hidden md:block" : ""}`}
+            className="hidden object-contain md:block"
           />
         </div>
       ))}
