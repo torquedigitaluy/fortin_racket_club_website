@@ -2,19 +2,12 @@
 
 import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import type { Slide } from "@/lib/heroSlides";
 
 const AUTOPLAY_MS = 6000;
 
-export default function HeroCarousel({
-  slides,
-  ctaLabel = "Saber más",
-}: {
-  slides: Slide[];
-  ctaLabel?: string;
-}) {
+export default function HeroCarousel({ slides }: { slides: Slide[] }) {
   const [current, setCurrent] = useState(0);
 
   const goTo = useCallback(
@@ -73,22 +66,6 @@ export default function HeroCarousel({
       {/* Overlay oscuro */}
       <div className="absolute inset-0 bg-brand/30" />
       <div className="absolute inset-0 bg-gradient-to-t from-brand/50 via-transparent to-brand/10" />
-
-      {/* Contenido */}
-      <div className="relative z-10 mx-auto flex h-full max-w-4xl flex-col items-center justify-center px-6 text-center text-white">
-        <h1 className="font-kanit text-4xl font-bold uppercase leading-tight tracking-wide drop-shadow-md sm:text-5xl md:text-7xl">
-          {slide.title}
-        </h1>
-        <p className="mt-6 max-w-2xl font-mulish text-base text-white/90 sm:text-lg">
-          {slide.text}
-        </p>
-        <Link
-          href="#quienes-somos"
-          className="mt-8 rounded-full bg-lime px-8 py-3.5 font-mulish text-sm font-semibold text-brand shadow-lg transition-transform hover:scale-105"
-        >
-          {ctaLabel}
-        </Link>
-      </div>
 
       {/* Flechas laterales */}
       <button

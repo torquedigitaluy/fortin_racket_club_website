@@ -17,12 +17,9 @@ export default async function Hero() {
         videoUrl={settings.hero_video_url}
         videoMovilUrl={settings.hero_video_movil_url}
         posterUrl={settings.hero_video_poster_url}
-        titulo={settings.hero_video_titulo}
-        texto={settings.hero_video_texto}
-        ctaLabel={settings.hero_video_cta_label}
       />
     );
   }
 
-  return <HeroCarousel slides={slides} ctaLabel={settings.hero_cta_label} />;
+  return <HeroCarousel slides={slides} />;
 }

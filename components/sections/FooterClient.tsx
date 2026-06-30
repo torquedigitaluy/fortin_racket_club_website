@@ -36,38 +36,48 @@ export default function FooterClient({
       {/* Cuerpo del footer (#142d4b) */}
       <div className="bg-brand text-white">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 py-16 md:grid-cols-3">
-          {/* Columna 1: info corporativa + teléfono + redes */}
-          <div>
-            <h3 className="font-kanit text-2xl font-bold uppercase">
-              Fortín <span className="text-white">Racket Club</span>
-            </h3>
-            <p className="mt-4 max-w-xs font-mulish text-sm text-white/70">
-              {settings.footer_descripcion}
-            </p>
-            <p className="mt-6 flex max-w-xs items-start gap-2 font-mulish text-sm text-white/70">
-              <MapPin className="mt-0.5 h-4 w-4 flex-shrink-0" />
-              {settings.contacto_direccion}
-            </p>
-            <a
-              href={telHref}
-              className="mt-4 inline-flex items-center gap-2 font-mulish text-sm text-white/90 transition-colors hover:text-lime"
-            >
-              <Phone className="h-4 w-4" /> {telefono}
-            </a>
-            <div className="mt-6 flex gap-3">
-              {redes.map((red) => {
-                const Icon = red.icon;
-                return (
-                  <a
-                    key={red.label}
-                    href={red.href}
-                    aria-label={red.label}
-                    className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-lime hover:text-brand"
-                  >
-                    <Icon className="h-5 w-5" />
-                  </a>
-                );
-              })}
+          {/* Columna 1: logo + info corporativa + teléfono + redes */}
+          <div className="flex items-start gap-5">
+            {settings.hero_logo_url && (
+              // eslint-disable-next-line @next/next/no-img-element -- logo de proporción/formato arbitrario
+              <img
+                src={settings.hero_logo_url}
+                alt={settings.hero_logo_alt}
+                className="h-20 w-auto shrink-0 object-contain md:h-24"
+              />
+            )}
+            <div>
+              <h3 className="font-kanit text-2xl font-bold uppercase">
+                Fortín <span className="text-white">Racket Club</span>
+              </h3>
+              <p className="mt-4 max-w-xs font-mulish text-sm text-white/70">
+                {settings.footer_descripcion}
+              </p>
+              <p className="mt-6 flex max-w-xs items-start gap-2 font-mulish text-sm text-white/70">
+                <MapPin className="mt-0.5 h-4 w-4 flex-shrink-0" />
+                {settings.contacto_direccion}
+              </p>
+              <a
+                href={telHref}
+                className="mt-4 inline-flex items-center gap-2 font-mulish text-sm text-white/90 transition-colors hover:text-lime"
+              >
+                <Phone className="h-4 w-4" /> {telefono}
+              </a>
+              <div className="mt-6 flex gap-3">
+                {redes.map((red) => {
+                  const Icon = red.icon;
+                  return (
+                    <a
+                      key={red.label}
+                      href={red.href}
+                      aria-label={red.label}
+                      className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-lime hover:text-brand"
+                    >
+                      <Icon className="h-5 w-5" />
+                    </a>
+                  );
+                })}
+              </div>
             </div>
           </div>
 

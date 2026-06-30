@@ -11,7 +11,6 @@ import { getSupabase } from "./supabase";
 export type Settings = Record<string, string>;
 
 export const SETTINGS_DEFAULTS: Settings = {
-  hero_cta_label: "Saber más",
   // Logo opcional del club, mostrado en el header junto al nombre.
   hero_logo_url: "/hero-logo-placeholder.svg",
   hero_logo_alt: "Logo Fortín Racket Club",
@@ -23,10 +22,6 @@ export const SETTINGS_DEFAULTS: Settings = {
     "https://videos.pexels.com/video-files/5730499/5730499-hd_720_1366_25fps.mp4",
   hero_video_poster_url:
     "https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&w=1920&q=80",
-  hero_video_titulo: "Fortín Racket Club",
-  hero_video_texto:
-    "Un club moderno donde el tenis se vive con pasión. Canchas profesionales, entrenamiento de primer nivel y comunidad.",
-  hero_video_cta_label: "Saber más",
   footer_descripcion:
     "Un club moderno donde el tenis se vive con pasión, comunidad y alto rendimiento.",
   contacto_telefono: "+54 11 1234-5678",
@@ -131,22 +126,6 @@ export const SETTINGS_GROUPS: {
         image: true,
         dependsOn: { key: "hero_modo", value: "video" },
       },
-      {
-        key: "hero_video_titulo",
-        label: "Video — título",
-        dependsOn: { key: "hero_modo", value: "video" },
-      },
-      {
-        key: "hero_video_texto",
-        label: "Video — bajada",
-        multiline: true,
-        dependsOn: { key: "hero_modo", value: "video" },
-      },
-      {
-        key: "hero_video_cta_label",
-        label: "Video — texto del botón",
-        dependsOn: { key: "hero_modo", value: "video" },
-      },
     ],
   },
   {
@@ -175,7 +154,6 @@ export const SETTINGS_GROUPS: {
   {
     label: "Hero & banner",
     fields: [
-      { key: "hero_cta_label", label: "Texto del botón del hero" },
       { key: "cta_eyebrow", label: "Banner — bajada" },
       { key: "cta_titulo", label: "Banner — título", multiline: true },
       { key: "cta_texto", label: "Banner — texto", multiline: true },

@@ -46,7 +46,7 @@ export default function NavbarClient({
             <img
               src={logoUrl}
               alt={logoAlt}
-              className="h-9 w-auto shrink-0 object-contain md:h-10"
+              className="h-14 w-auto shrink-0 object-contain md:h-16"
             />
           ) : (
             // Pelota de tenis: verde sobre fondo blanco, blanca sobre fondo transparente
