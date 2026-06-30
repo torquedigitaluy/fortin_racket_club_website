@@ -1,7 +1,17 @@
 import Link from "next/link";
-import { Phone, MapPin, Instagram, Facebook, Youtube, MessageCircle } from "lucide-react";
+import {
+  Phone,
+  MapPin,
+  Instagram,
+  Facebook,
+  Youtube,
+  MessageCircle,
+  ExternalLink,
+  Navigation,
+} from "lucide-react";
 import type { NavLink } from "@/lib/navLinks";
 import type { Settings } from "@/lib/settings";
+import { GOOGLE_MAPS_URL, WAZE_URL } from "@/lib/clubLocation";
 import ScrollTopButton from "./ScrollTopButton";
 import FooterMap from "./FooterMap";
 
@@ -86,11 +96,54 @@ export default function FooterClient({
             </a>
           </div>
 
-          {/* Columna 3: mapa de ubicación */}
+          {/* Columna 3: mapa de ubicación, como tarjeta clara con accesos directos */}
           <div>
             <h4 className="font-kanit text-lg font-bold">Ubicación</h4>
-            <div className="mt-4 overflow-hidden rounded-2xl">
-              <FooterMap />
+            <div className="mt-4 overflow-hidden rounded-2xl bg-white text-brand shadow-lg">
+              <div className="relative">
+                <FooterMap />
+                <a
+                  href={GOOGLE_MAPS_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1.5 font-mulish text-xs font-semibold text-brand shadow-md transition-colors hover:bg-offwhite"
+                >
+                  Abrir en Maps <ExternalLink className="h-3.5 w-3.5" />
+                </a>
+              </div>
+
+              <div className="flex flex-col gap-4 p-5">
+                <div className="flex items-start gap-2.5">
+                  <MapPin className="mt-0.5 h-5 w-5 flex-shrink-0 text-brand" />
+                  <div>
+                    <p className="font-kanit text-sm font-bold uppercase tracking-wide text-brand">
+                      Fortín Racket Club
+                    </p>
+                    <p className="mt-1 font-mulish text-xs leading-relaxed text-brand/60">
+                      {settings.contacto_direccion}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-2">
+                  <a
+                    href={GOOGLE_MAPS_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-1.5 rounded-full border border-brand/15 px-3 py-2 font-mulish text-xs font-semibold text-brand transition-colors hover:bg-offwhite"
+                  >
+                    <MapPin className="h-3.5 w-3.5" /> Google Maps
+                  </a>
+                  <a
+                    href={WAZE_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-1.5 rounded-full border border-brand/15 px-3 py-2 font-mulish text-xs font-semibold text-brand transition-colors hover:bg-offwhite"
+                  >
+                    <Navigation className="h-3.5 w-3.5" /> Waze
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
