@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useFormStatus } from "react-dom";
+import { useFormState, useFormStatus } from "react-dom";
 import type { Field, Resource } from "@/lib/admin/resources";
 import { saveRecord } from "@/lib/admin/crud";
 import ImageUpload from "./ImageUpload";
@@ -145,12 +145,19 @@ export default function ResourceForm({
 }) {
   const nuevo = id === "new";
   const action = saveRecord.bind(null, resourceKey, id);
+  const [state, formAction] = useFormState(action, { error: null });
 
   return (
-    <form action={action} className="flex max-w-xl flex-col gap-5">
+    <form action={formAction} className="flex max-w-xl flex-col gap-5">
       {resource.fields.map((field) => (
         <FieldInput key={field.name} field={field} value={record?.[field.name]} />
       ))}
+
+      {state.error && (
+        <p className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 font-mulish text-sm text-red-700">
+          No se pudo guardar: {state.error}
+        </p>
+      )}
 
       <div className="mt-2 flex items-center gap-4">
         <SubmitButton nuevo={nuevo} />

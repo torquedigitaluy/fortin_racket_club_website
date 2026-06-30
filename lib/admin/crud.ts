@@ -43,18 +43,27 @@ function parseForm(resourceKey: string, formData: FormData): Values {
   return values;
 }
 
+export type SaveState = { error: string | null };
+
+/**
+ * Nota: no usa try/catch alrededor de `redirect()` a propósito — `redirect()`
+ * funciona lanzando una excepción especial (NEXT_REDIRECT) que Next.js
+ * intercepta; envolverla rompería la navegación. Los `return { error }` de
+ * abajo cortan el flujo antes de llegar al redirect en caso de error.
+ */
 export async function saveRecord(
   resourceKey: string,
   id: string,
+  _prevState: SaveState,
   formData: FormData
-) {
+): Promise<SaveState> {
   await requireAdmin();
 
   const resource = getResource(resourceKey);
-  if (!resource) throw new Error(`Recurso desconocido: ${resourceKey}`);
+  if (!resource) return { error: `Recurso desconocido: ${resourceKey}` };
 
   const supabase = createClient();
-  if (!supabase) throw new Error("Supabase no está configurado.");
+  if (!supabase) return { error: "Supabase no está configurado." };
 
   const values = parseForm(resourceKey, formData);
 
@@ -65,13 +74,13 @@ export async function saveRecord(
       Object.entries(values).filter(([, v]) => v !== "" && v !== null)
     );
     const { error } = await supabase.from(resource.table).insert(insertValues);
-    if (error) throw new Error(error.message);
+    if (error) return { error: error.message };
   } else {
     const { error } = await supabase
       .from(resource.table)
       .update(values)
       .eq("id", id);
-    if (error) throw new Error(error.message);
+    if (error) return { error: error.message };
   }
 
   revalidatePath("/");
