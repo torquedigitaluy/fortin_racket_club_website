@@ -14,8 +14,6 @@ export default function HeroVideo({
   titulo,
   texto,
   ctaLabel = "Saber más",
-  logoUrl,
-  logoAlt = "",
 }: {
   videoUrl: string;
   videoMovilUrl?: string;
@@ -23,8 +21,6 @@ export default function HeroVideo({
   titulo: string;
   texto: string;
   ctaLabel?: string;
-  logoUrl?: string;
-  logoAlt?: string;
 }) {
   return (
     <section id="inicio" className="relative h-screen min-h-[600px] w-full overflow-hidden">
@@ -41,14 +37,6 @@ export default function HeroVideo({
 
       {/* Contenido */}
       <div className="relative z-10 mx-auto flex h-full max-w-4xl flex-col items-center justify-center px-6 text-center text-white">
-        {logoUrl && (
-          // eslint-disable-next-line @next/next/no-img-element -- logo de proporción/format arbitrario (puede ser SVG)
-          <img
-            src={logoUrl}
-            alt={logoAlt}
-            className="mb-2 h-80 w-auto max-w-full object-contain drop-shadow-md md:h-96"
-          />
-        )}
         <h1 className="font-kanit text-4xl font-bold uppercase leading-tight tracking-wide drop-shadow-md sm:text-5xl md:text-7xl">
           {titulo}
         </h1>

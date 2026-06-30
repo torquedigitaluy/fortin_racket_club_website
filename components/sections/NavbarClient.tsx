@@ -5,7 +5,15 @@ import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import type { NavLink } from "@/lib/navLinks";
 
-export default function NavbarClient({ navLinks }: { navLinks: NavLink[] }) {
+export default function NavbarClient({
+  navLinks,
+  logoUrl,
+  logoAlt = "",
+}: {
+  navLinks: NavLink[];
+  logoUrl?: string;
+  logoAlt?: string;
+}) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -33,29 +41,38 @@ export default function NavbarClient({ navLinks }: { navLinks: NavLink[] }) {
           onClick={() => setMenuOpen(false)}
           className="flex items-center gap-2 font-kanit text-xl font-bold uppercase tracking-tight md:text-2xl"
         >
-          {/* Pelota de tenis: verde sobre fondo blanco, blanca sobre fondo transparente */}
-          <svg
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-            aria-hidden
-            className="h-6 w-6 shrink-0 md:h-7 md:w-7"
-          >
-            <circle cx="12" cy="12" r="10" fill={onLight ? "#93d419" : "#ffffff"} />
-            <path
-              d="M4.2 5.6a11 11 0 0 1 0 12.8"
-              fill="none"
-              stroke={onLight ? "#ffffff" : "#142d4b"}
-              strokeWidth="1.4"
-              strokeLinecap="round"
+          {logoUrl ? (
+            // eslint-disable-next-line @next/next/no-img-element -- logo de proporción/formato arbitrario
+            <img
+              src={logoUrl}
+              alt={logoAlt}
+              className="h-9 w-auto shrink-0 object-contain md:h-10"
             />
-            <path
-              d="M19.8 5.6a11 11 0 0 0 0 12.8"
-              fill="none"
-              stroke={onLight ? "#ffffff" : "#142d4b"}
-              strokeWidth="1.4"
-              strokeLinecap="round"
-            />
-          </svg>
+          ) : (
+            // Pelota de tenis: verde sobre fondo blanco, blanca sobre fondo transparente
+            <svg
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden
+              className="h-6 w-6 shrink-0 md:h-7 md:w-7"
+            >
+              <circle cx="12" cy="12" r="10" fill={onLight ? "#93d419" : "#ffffff"} />
+              <path
+                d="M4.2 5.6a11 11 0 0 1 0 12.8"
+                fill="none"
+                stroke={onLight ? "#ffffff" : "#142d4b"}
+                strokeWidth="1.4"
+                strokeLinecap="round"
+              />
+              <path
+                d="M19.8 5.6a11 11 0 0 0 0 12.8"
+                fill="none"
+                stroke={onLight ? "#ffffff" : "#142d4b"}
+                strokeWidth="1.4"
+                strokeLinecap="round"
+              />
+            </svg>
+          )}
           <span className={onLight ? "text-brand" : "text-white"}>
             Fortín Racket Club
           </span>
