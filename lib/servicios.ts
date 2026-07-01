@@ -16,32 +16,28 @@ const MOCK_SERVICIOS: Servicio[] = [
   {
     title: "Reserva de canchas",
     text: "Canchas profesionales disponibles de 09:00 a 23:00. Reservá online en segundos.",
-    image:
-      "https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&w=800&q=80",
+    image: "/DOM_4017 - reserva de canchas.JPG",
     alt: "Cancha de tenis lista para jugar",
     href: "#reservas",
   },
   {
     title: "Entrenamientos personales",
     text: "Clases individuales con coaches profesionales adaptadas a tu nivel y objetivos.",
-    image:
-      "https://images.unsplash.com/photo-1622279457486-62dcc4a431d6?auto=format&fit=crop&w=800&q=80",
+    image: "/DOM_4467 - entrenamientos personales.JPG",
     alt: "Entrenador dando una clase de tenis",
     href: "#actividades",
   },
   {
     title: "Escuela infantil",
     text: "Formación para los más chicos en un entorno seguro, divertido y profesional.",
-    image:
-      "https://images.unsplash.com/photo-1723980856085-8f8e725329a7?auto=format&fit=crop&w=800&q=80",
+    image: "/DOM_3856 - escuela infantil.JPG",
     alt: "Niña con raqueta en una cancha de tenis",
     href: "#actividades",
   },
   {
     title: "Actividades",
     text: "Torneos, clases sociales y eventos para vivir el club más allá de la cancha.",
-    image:
-      "https://images.unsplash.com/photo-1530915365347-e35b749a0381?auto=format&fit=crop&w=800&q=80",
+    image: "/DOM_4752 - actividades.jpg",
     alt: "Jugadores disfrutando una actividad del club",
     href: "#actividades",
   },

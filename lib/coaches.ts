@@ -29,39 +29,35 @@ export type Coach = {
 const MOCK_COACHES: Coach[] = [
   {
     id: 1,
-    nombre: "Martín Herrera",
+    nombre: "Augusto",
     cargo: "Director deportivo",
     descripcion:
       "Ex jugador profesional con más de 15 años formando campeones.",
-    foto_url:
-      "https://images.unsplash.com/photo-1714841197541-aa64d90cb6a8?auto=format&fit=crop&w=600&q=80",
+    foto_url: "/DOM_4329 - Augusto 1.JPG",
   },
   {
     id: 2,
-    nombre: "Lucía Fernández",
+    nombre: "Gime",
     cargo: "Coach de alto rendimiento",
     descripcion:
       "Especialista en técnica y preparación para la competencia.",
-    foto_url:
-      "https://images.unsplash.com/photo-1545151414-8a948e1ea54f?auto=format&fit=crop&w=600&q=80",
+    foto_url: "/DOM_4613 - Gime 2 cortar vertical.JPG",
   },
   {
     id: 3,
-    nombre: "Diego Sosa",
+    nombre: "Marti",
     cargo: "Coach escuela infantil",
     descripcion:
       "Apasionado por iniciar a los más chicos en el mundo del tenis.",
-    foto_url:
-      "https://images.unsplash.com/photo-1516742720271-6ae39cbc5bd1?auto=format&fit=crop&w=600&q=80",
+    foto_url: "/DOM_4587 - Marti 3 cortar vertical.JPG",
   },
   {
     id: 4,
-    nombre: "Carla Méndez",
+    nombre: "Fede",
     cargo: "Preparadora física",
     descripcion:
       "Diseña los planes físicos para que rindas al máximo en cancha.",
-    foto_url:
-      "https://images.unsplash.com/photo-1595435742656-5272d0b3fa82?auto=format&fit=crop&w=600&q=80",
+    foto_url: "/DOM_4307 - fede 4.JPG",
   },
 ];
 

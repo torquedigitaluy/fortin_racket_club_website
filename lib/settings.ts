@@ -41,20 +41,17 @@ export const SETTINGS_DEFAULTS: Settings = {
   newsletter_texto:
     "Recibí novedades, torneos y promociones exclusivas en tu correo.",
   reservas_precio_hora: "999",
-  clases_imagen_url:
-    "https://images.unsplash.com/photo-1531315396756-905d68d21b56?auto=format&fit=crop&w=1000&q=80",
+  clases_imagen_url: "/DOM_4759 - tu primer clase gratis.jpg",
   clases_imagen_alt: "Tenista en plena acción durante una clase",
   beneficios_imagen_url:
     "https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?auto=format&fit=crop&w=800&q=80",
   beneficios_imagen_alt: "Raqueta de tenis y pelotas",
-  torneo_imagen_url:
-    "https://images.unsplash.com/photo-1751275061929-2f63fc96838c?auto=format&fit=crop&w=1000&q=80",
+  torneo_imagen_url: "/DOM_4733 - fortin club cup izqueirda.jpg",
   torneo_imagen_alt: "Cancha de polvo de ladrillo",
   torneo_bg_url:
     "https://images.unsplash.com/photo-1751275061929-2f63fc96838c?auto=format&fit=crop&w=1000&q=80",
   torneo_bg_alt: "Cancha de polvo de ladrillo",
-  reservas_imagen_url:
-    "https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&w=1200&q=80",
+  reservas_imagen_url: "/DOM_4666 b - reserva de canchas.JPG",
   reservas_imagen_alt: "Ambiente del club de tenis",
   // Variantes verticales (9:16) opcionales para móvil. Si quedan vacías, se usa
   // la imagen horizontal de escritorio también en móvil.
@@ -65,8 +62,7 @@ export const SETTINGS_DEFAULTS: Settings = {
     "https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&w=1920&q=80",
   planes_bg_url:
     "https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&w=1920&q=80",
-  planes_destacado_bg_url:
-    "https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?auto=format&fit=crop&w=800&q=80",
+  planes_destacado_bg_url: "/DOM_4693 - plan full.jpg",
   newsletter_bg_url:
     "https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?auto=format&fit=crop&w=1920&q=80",
 };
