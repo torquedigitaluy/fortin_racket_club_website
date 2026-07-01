@@ -30,34 +30,30 @@ const MOCK_COACHES: Coach[] = [
   {
     id: 1,
     nombre: "Augusto",
-    cargo: "Director deportivo",
-    descripcion:
-      "Ex jugador profesional con más de 15 años formando campeones.",
-    foto_url: "/DOM_4329 - Augusto 1.JPG",
+    cargo: "",
+    descripcion: "",
+    foto_url: "/Augusto 1.jpeg",
   },
   {
     id: 2,
     nombre: "Gime",
-    cargo: "Coach de alto rendimiento",
-    descripcion:
-      "Especialista en técnica y preparación para la competencia.",
-    foto_url: "/DOM_4613 - Gime 2 cortar vertical.JPG",
+    cargo: "",
+    descripcion: "",
+    foto_url: "/Gime 2.jpeg",
   },
   {
     id: 3,
     nombre: "Marti",
-    cargo: "Coach escuela infantil",
-    descripcion:
-      "Apasionado por iniciar a los más chicos en el mundo del tenis.",
+    cargo: "",
+    descripcion: "",
     foto_url: "/DOM_4587 - Marti 3 cortar vertical.JPG",
   },
   {
     id: 4,
     nombre: "Fede",
-    cargo: "Preparadora física",
-    descripcion:
-      "Diseña los planes físicos para que rindas al máximo en cancha.",
-    foto_url: "/DOM_4307 - fede 4.JPG",
+    cargo: "",
+    descripcion: "",
+    foto_url: "/Fede 4.jpeg",
   },
 ];
 

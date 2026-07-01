@@ -36,36 +36,29 @@ export default async function Entrenadores() {
               className="group flex flex-col overflow-hidden rounded-2xl bg-gray-100 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
             >
               {/* Foto */}
-              <div className="relative h-64 w-full overflow-hidden">
+              <div className="relative aspect-[3/4] w-full overflow-hidden">
                 <Image
                   src={coach.foto_url}
                   alt={`Foto de ${coach.nombre}`}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   unoptimized
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
 
               {/* Datos */}
-              <div className="flex flex-1 flex-col p-6">
+              <div className="flex items-center justify-between px-5 py-4">
                 <h3 className="font-kanit text-lg font-bold text-brand">
                   {coach.nombre}
                 </h3>
-                <span className="mt-1 font-mulish text-xs font-semibold uppercase tracking-wide text-brand">
-                  {coach.cargo}
-                </span>
-                <p className="mt-3 font-mulish text-sm text-brand/70">
-                  {coach.descripcion}
-                </p>
-                {/* Redes sociales */}
-                <div className="mt-auto flex gap-2 pt-4">
+                <div className="flex gap-2">
                   {REDES.map(({ Icon, label }) => (
                     <a
                       key={label}
                       href="#"
                       aria-label={`${coach.nombre} en ${label}`}
-                      className="flex h-9 w-9 items-center justify-center rounded-full bg-brand/5 text-brand transition-colors hover:bg-brand hover:text-white"
+                      className="flex h-8 w-8 items-center justify-center rounded-full bg-brand/5 text-brand transition-colors hover:bg-brand hover:text-white"
                     >
                       <Icon className="h-4 w-4" strokeWidth={1.75} />
                     </a>
